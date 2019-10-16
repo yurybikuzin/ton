@@ -1,11 +1,18 @@
+=======================
+
+Telegram Contests
+Developers who are taking part in the blockchain competition can obtain test Grams using @test_ton_bot.
+
+=======================
+
+see ton-bootstrap-v2.sh
+
+=======================
+
 https://github.com/ton-blockchain/ton/issues/16
 
 apt-get -y install build-essential cmake gperf ccache 
 apt-get -y install libz-dev libssl-dev libmicrohttpd-dev libreadline-dev libgflags-dev
-
-
-Telegram Contests
-Developers who are taking part in the blockchain competition can obtain test Grams using @test_ton_bot.
 
 =====================
 
