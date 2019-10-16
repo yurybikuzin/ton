@@ -1,0 +1,7 @@
+#!/usr/bin/fift -s
+"TonUtil.fif" include
+<b
+  $1 parse-int
+  256 u,
+b> <s csr.
+

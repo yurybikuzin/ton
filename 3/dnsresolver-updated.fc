@@ -1,0 +1,67 @@
+;; DNS Resolver smart contract
+
+() recv_internal(slice in_msg) impure {
+  ;; do nothing for internal messages
+}
+
+() recv_external(slice in_msg) impure {
+  var signature = in_msg~load_bits(512);
+  var cs = in_msg;
+
+  var (msg_seqno, action) = (cs~load_uint(32), cs~load_uint(32));
+
+  var ds = get_data().begin_parse();
+  var stored_seqno = ds~load_uint(32);
+  var public_key = ds~load_uint(256);
+  var dns_dict = ds~load_ref();
+  ds.end_parse();
+
+  throw_unless(33, msg_seqno == stored_seqno);
+  throw_unless(34, check_signature(slice_hash(in_msg), signature, public_key));
+  accept_message();
+
+  if (action == 0x43665021) {
+    ;; register subdomain
+    ;; var param_index = cs~load_uint(32);
+    ;; var param_value = cs~load_ref();
+    ;; cs.end_parse();
+    ;; cfg_dict~idict_set_ref(32, param_index, param_value);
+  } elseif (action == 0x4e436f64) {
+    ;; update smart contract code
+    var new_code = cs~load_ref();
+    ;; cs.end_parse();
+    set_code(new_code);
+  } elseif (action == 0x50624b21) {
+    ;; transfer to new owner: change public key
+    var ps = cs~load_ref().begin_parse();
+    public_key = ps~load_uint(256);
+  } else {
+    throw_if(32, action);
+  }
+
+  set_data(begin_cell().store_uint(stored_seqno + 1, 32).store_uint(public_key, 256).store_ref(dns_dict).end_cell());
+}
+
+;; Get methods
+
+int seqno() method_id {
+  return get_data().begin_parse().preload_uint(32);
+}
+
+(int, cell) dnsresolve() method_id {
+  ;; TODO
+  return (0, begin_cell().end_cell());
+}
+
+int owner() method_id {
+  var ds = get_data().begin_parse();
+  var stored_seqno = ds~load_uint(32);
+  var public_key = ds~load_uint(256);
+  return public_key;
+}
+
+int ver() method_id {
+  return 43;
+}
+
+

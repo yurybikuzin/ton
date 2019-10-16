@@ -1,0 +1,5 @@
+*.boc
+*.pk
+*.addr
+!sponsor.pk
+!sponsor.addr

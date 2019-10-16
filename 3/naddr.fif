@@ -1,0 +1,8 @@
+#!/usr/bin/fift -s
+// Non-bounceable address (for init only)
+"TonUtil.fif" include
+$1 constant file-base
+file-base +".addr" file>B 32 B|
+dup Blen { 32 B>i@ } { drop Basechain } cond constant wallet_wc
+256 B>u@ dup constant wallet_addr
+wallet_wc wallet_addr 2dup 7 smca>$ type cr

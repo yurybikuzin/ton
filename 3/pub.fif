@@ -1,0 +1,9 @@
+#!/usr/bin/fift -s
+"TonUtil.fif" include
+<b
+  $1 file>B
+  dup Blen 32 <> abort"Private key must be exactly 32 bytes long"
+  priv>pub
+  B,
+b> <s csr.
+

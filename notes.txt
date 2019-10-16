@@ -1,0 +1,57 @@
+https://github.com/ton-blockchain/ton/issues/16
+
+apt-get -y install build-essential cmake gperf ccache 
+apt-get -y install libz-dev libssl-dev libmicrohttpd-dev libreadline-dev libgflags-dev
+
+
+Telegram Contests
+Developers who are taking part in the blockchain competition can obtain test Grams using @test_ton_bot.
+
+=====================
+
+git clone https://github.com/ton-blockchain/ton.git
+cd ton
+git submodule update --init --recursive
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build .
+
+——
+sudo chown yurybikuzin -R ~/.ccache
+sudo chown $(whomi) -R ~/.ccache
+
+============
+to start a lite client:
+
+lite-client -C /etc/ton/ton-client.config
+
+to start a full node (started by default):
+service ton-node start
+
+============
+bugs 
+$# - ?
+.: not an integer
+.s - strange behaviour
+including this:
+Object{0x7fcd62e00270} 
+ ok
+17
+ ok
+.s
+ ok
+.sl
+Object{0x7fcd62e00270} 17 Box{0x7fcd62e00370}
+
+<b 7 3 i
+[ 1][t 0][1569746326.713017225][words.cpp:2784] i: -?
+=======================================
+=======================================
+
+Probably BUGS:
+
+1. could not transfer Grams to:
+0QDYQF5FRQD7ZZuxg-Yj1-nPI1HV515fpmgGXzDw2A1qs3u_
+-------------
+2. see also 3/dnsresolver-upd.fif:23
+=======================================
